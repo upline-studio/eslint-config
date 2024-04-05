@@ -7,7 +7,7 @@ module.exports = {
     'plugin:compat/recommended',
   ],
 
-  plugins: ['@typescript-eslint'],
+  plugins: ['import', '@typescript-eslint', 'vue'],
   parser: 'vue-eslint-parser',
   parserOptions: {
     parser: require.resolve('@typescript-eslint/parser'),
@@ -133,7 +133,7 @@ module.exports = {
     {
       "files": ["**/*.vue"],
       "rules": {
-        'import/prefer-default-export': 'on',
+        'import/prefer-default-export': 'warn',
         'import/no-default-export': 'off',
       }
     }
