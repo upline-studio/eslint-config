@@ -1,16 +1,17 @@
 module.exports = {
   extends: [
-      'airbnb-base',
-      'plugin:@typescript-eslint/recommended',
-      'plugin:vue/vue3-recommended',
-      'prettier',
-      'plugin:compat/recommended',
+    'airbnb-base',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:vue/vue3-recommended',
+    'prettier',
+    'plugin:compat/recommended',
   ],
+
   plugins: ['@typescript-eslint'],
   parser: 'vue-eslint-parser',
   parserOptions: {
-    parser: '@typescript-eslint/parser',
-    ecmaVersion: 2020,
+    parser: require.resolve('@typescript-eslint/parser'),
+    extraFileExtensions: ['.vue'],
   },
   env: {
     browser: true,
@@ -75,8 +76,75 @@ module.exports = {
         patterns: ['**/../*'],
       },
     ],
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'vue/require-typed-object-prop': 'error',
+    'vue/block-order': [
+      'error',
+      {
+        order: [['script', 'template'], 'style'],
+      },
+    ],
+    'vue/component-api-style': ['warn', ['script-setup']],
+    'vue/component-name-in-template-casing': [
+      'error',
+      'kebab-case',
+      {
+        registeredComponentsOnly: false,
+        ignores: [],
+      },
+    ],
+    'vue/custom-event-name-casing': [
+      'error',
+      'kebab-case',
+      {
+        ignores: [],
+      },
+    ],
+    "vue/html-button-has-type": ["error", {
+      "button": true,
+      "submit": true,
+      "reset": true
+    }],
+    "vue/match-component-file-name": ["error", {
+      "extensions": ["vue"],
+      "shouldMatchCase": false
+    }],
+    "vue/match-component-import-name": ["error"],
+    "vue/no-boolean-default": ["error", "default-false"],
+    "vue/no-potential-component-option-typo": ["error", {
+      "presets": ["all"]
+    }],
+    "vue/no-ref-object-reactivity-loss": ["error"],
+    "vue/no-required-prop-with-default": ["error"],
+    "vue/no-setup-props-reactivity-loss": ["error"],
+    "vue/no-static-inline-styles": ["error"],
+    "vue/no-unused-emit-declarations": ["error"],
+    "vue/no-unused-properties": ["warn"],
+    "vue/no-unused-refs": ["error"],
+    "vue/no-useless-v-bind": ["error"],
+    "vue/padding-line-between-blocks": ["error"],
+    "vue/require-explicit-slots": ["warn"],
+    "vue/require-expose": ["warn"],
+    "vue/require-name-property": ["error"],
+    "vue/require-typed-ref": ["warn"],
+    "vue/v-for-delimiter-style": ["error", "in"],
   },
-  settings: {},
+  "overrides": [
+    {
+      "files": ["**/*.vue"],
+      "rules": {
+        'import/prefer-default-export': 'on',
+        'import/no-default-export': 'off',
+      }
+    }
+  ],
+  settings: {
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+      }
+    }
+  },
 };
 
 
